@@ -1,0 +1,33 @@
+#Dev Help file V1.0 
+#Aug 1, 2017 
+#Tareq Mamdouh
+
+* booking Cancellation Procedure
+
+ 1- delete booking entry from booking table
+ 2- delete passengers from bookingpassenger table
+ 3- add refund payment to the user in payment table
+ 4- add refund value to user credit in member table
+
+
+
+
+CREATE DEFINER = CURRENT_USER TRIGGER `godb3`.`booking_AFTER_DELETE` AFTER DELETE ON `booking` FOR EACH ROW
+BEGIN
+
+#delete booking passengers
+delete from bookingpassenger where bookingid = OLD.bookingid;
+
+
+#add refund entry for agent in payment table
+insert into payment (agentid,paymenttime,paymentusdamount)
+values (OLD.memberid,NOW(),OLD.totalfare);
+
+#update user credit
+UPDATE members
+     SET membercredit = membercredit + OLD.totalfare
+   WHERE id = OLD.memberid;
+
+
+
+END
