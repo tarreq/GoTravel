@@ -12,6 +12,7 @@ require 'php-export-data.class.php';
 
 
 
+
 //Export XLS file
 function exportExcel(){
     // 'browser' tells the library to stream the data directly to the browser.
@@ -62,6 +63,22 @@ order by paymentid desc limit 1");
     return $lastPayment;
     
 }
+
+//get last flight available seats count
+function getPassengerCountByAge($flightid,$age_min, $age_max){
+    $mysqli = new mysqli(DB_SERVER,DB_USER,DB_PASSWORD,DB_NAME);
+    $rs = $mysqli->query( 'CALL get_passenger_count_by_age('.$flightid.', '.$age_min.','.$age_max.',@total )' );
+    $rs = $mysqli->query( 'SELECT @total' );
+    $row = mysqli_fetch_array($rs);
+    return $row[0]; 
+
+//    while($row = $rs->fetch_object())
+//        {
+//            debug($row);
+//        }
+    
+}
+
 
 //get last flight available seats count
 function getCurrentFlightId(){

@@ -15,12 +15,14 @@
         
 <!--        Paste rendered grid code here-->
 <table id="dg" class="easyui-datagrid" title="Flights" fit="true"
-			data-options="
+<!--			data-options="
 				iconCls: 'icon-edit',
 				singleSelect: true,
 				url: 'get_passengers_q.php',
-				method: 'get'
-			">
+				method: 'get',
+                                pagination:true,
+                                remoteFilter: true"-->
+                                >
 		<thead>
 			<tr>
 				<th data-options="field:'bookingid',width:80">Booking ID</th>
@@ -59,8 +61,23 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyEntry()">Delete </a>
 </div>
 	
-	
+	<script type="text/javascript" src="datagrid-filter.js"></script>
 	<script type="text/javascript">
+                 
+                 
+                 $(function(){
+            var dg = $('#dg').datagrid({
+                url: 'get_passengers_q.php',
+//                pagination: true,
+//                remoteFilter: true,
+                singleSelect:true,
+                rownumbers: true
+            });
+            dg.datagrid('enableFilter');
+            dg.datagrid('doFilter');
+        });
+            
+            
 		var url;
 		function newUser(){
 			$('#dlg').dialog('open').dialog('setTitle','New Payment');

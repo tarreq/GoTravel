@@ -24,7 +24,25 @@
 
 
 <br>
-<a href="javascript:void(0)" class="easyui-linkbutton c1" data-options="iconCls:'fa fa-money'" onclick='downloadCSV({ filename: <?php echo "\"". getCurrentFlightCode(). "_Flight_Passengers.xls\"" ?> });'>Export to Excel</a>
+
+<table>
+    <tr>
+        <td>
+          Adults:   <?php echo getPassengerCountByAge(getCurrentFlightId(),12.1,100); ?>
+        </td>
+        <td>
+          Children:   <?php echo getPassengerCountByAge(getCurrentFlightId(),2.1,12); ?>  
+        </td>
+        <td>
+         Infants:   <?php echo getPassengerCountByAge(getCurrentFlightId(),0,2); ?>
+        </td>
+        <td>
+          <a href="javascript:void(0)" class="easyui-linkbutton c1" data-options="iconCls:'fa fa-money'" onclick='downloadCSV({ filename: <?php echo "\"". getCurrentFlightCode(). "_Flight_Passengers.xls\"" ?> });'>Export to Excel</a>  
+        </td>
+       
+    </tr>
+</table>
+
 <br>
 <br>
 <table id="dg" class="easyui-datagrid" title="Current Flight Passengers" fit="true"

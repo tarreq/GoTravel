@@ -31,6 +31,7 @@
 				<th field="paymentamount" width="50">Paid Amount</th>
 				<th field="paymentcurrencyid" width="50">Currency</th>
                                 <th field="paymentusdamount" width="50">USD Amount</th>
+                                 <th field="notes" width="50">Notes</th>
 			</tr>
 		</thead>
 	</table>
