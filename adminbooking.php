@@ -189,7 +189,7 @@ $(function () {
         </form>
                                 
                                  <p id="feedback">
-                    <div id="select-result" style="display: none;">none</div>
+                    <div id="select-result" >none</div>
                 </p>
                 
                 <ul id="selectable">

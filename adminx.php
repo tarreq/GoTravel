@@ -143,11 +143,11 @@ $(function () {
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Payments','payment/paymentreports.php')"><?php echo $lang['payments_menu_item_payment_reports']; ?></a>
 				</div>
                                 <div title="Bookings" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">All Bookings</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('All Bookings','mybookings.php')">All Bookings</a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Book','adminbooking.php')">Book a ticket</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Cancel a booking</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Cancel Booking','mybookingscancel.php')">Cancel a booking</a>
                                         
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Booking reports</a>

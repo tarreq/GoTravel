@@ -155,13 +155,12 @@
                 {field:'totalfare',title:'Fare',width:100},
                 {field:'firstclassseats',title:'Business',width:100},
                 {field:'secondclassseats',title:'Economy',width:100},
-                {field: 'action', title: 'Cancel'
-//                    ,
-//                formatter:function(value,row,index)
-//                {
-//		var s = '<button onclick="destroyBooking()">Cancel Booking</button>';
-//		return s;
-//        	}
+                {field: 'action', title: 'Cancel',
+                formatter:function(value,row,index)
+                {
+		var s = '<button onclick="destroyBooking()">Cancel Booking</button>';
+		return s;
+        	}
                 } 
                 ]],
     view: detailview,
