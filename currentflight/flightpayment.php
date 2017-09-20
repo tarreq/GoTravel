@@ -22,7 +22,7 @@
         <br>
         <br>
         
-        <form id="paymentreportsform" method="post" action="paymentreports.php"> 
+        <form id="paymentreportsform" method="post"> 
         <table>
             <tr>
                 
@@ -30,7 +30,7 @@
                 data-options="valueField:'id',textField:'username',url:'../lookuptable.php?table=members'"></td>
                 
             </tr>
-            <tr>
+<!--            <tr>
                 <td width="100px">booking From </td>
                 <td width="150px"> 
                 <input id="pfrom" name="pfrom" class="easyui-datebox" data-options="label:'Select Date:',labelPosition:'top',onSelect:onSelect">
@@ -39,7 +39,7 @@
                 <td width="150px"> 
                 <input id="pto" name="pto" class="easyui-datebox" data-options="label:'Select Date:',labelPosition:'top',onSelect:onSelect">
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td width="60px">
             <div style="color:#ed0202;">
@@ -201,51 +201,17 @@ function convertArrayOfObjectsToCSV(args) {
         
         
         var agentid = $('#memberid').combobox('getValue');
-        var newpfrom = '';
-        var newpto = '';
-        
-        var datevalf = $('#pfrom').datebox('getValue');
-        var datevalt = ($('#pto').datebox('getValue'));
-        
-        
-        
-        if(datevalf.indexOf("/")> 0)
-            {
-                var parts1 = datevalf.split("/");
-                newpfrom = parts1[2] + '-' + parts1[0] + '-' + parts1[1];
-            }
-            
-        if(datevalt.indexOf("/")> 0)
-            {
-                var parts2 = datevalt.split("/");
-                newpto = parts2[2] + '-' + parts2[0] + '-' + parts2[1];
-            }
+       
         
         
         
 //        var parts2 = datevalt.split("/");
 //         newpto = parts2[2] + '-' + parts2[0] + '-' + parts2[1];
         
-        $('#dg').datagrid('load', 'get_current_payment.php?memberid='+agentid+'&pfrom='+newpfrom+'&pto='+newpto);
+        $('#dg').datagrid('load', 'get_current_payment.php?memberid='+agentid);
         }
         
    
-   $('#adminid').combobox({
-        valueField: 'id',
-	textField: 'username',
-	
-	onChange: function(row){
-            onSelect();
-//            var adminid = $('#adminid').combobox('getValue');
-//            var agentid = $('#agentid').combobox('getValue');
-//            //$('#aird').combobox('reload', 'data_get/get_destination_airports.php?origin='+origin)
-//
-//        
-//                  $('#dg').datagrid('load', 'get_current_payment.php?adminid='+adminid+'&agentid='+agentid);
-                  
-               }
-               
-       })
        
        
        $('#memberid').combobox({
@@ -255,13 +221,7 @@ function convertArrayOfObjectsToCSV(args) {
 	onChange: function(row){
             onSelect();
             
-//            var adminid = $('#adminid').combobox('getValue');
-//            var agentid = $('#agentid').combobox('getValue');
-//            //$('#aird').combobox('reload', 'data_get/get_destination_airports.php?origin='+origin)
-//
-//        
-//                  $('#dg').datagrid('load', 'get_current_payment.php?adminid='+adminid+'&agentid='+agentid);
-                  
+                 
                }
                
        })
@@ -284,22 +244,7 @@ function convertArrayOfObjectsToCSV(args) {
 	}
     })
     
-        //grid sum
-        function somma () {
-  var data = $('#dg').datagrid('getData');
-  var rows = data.rows;
-  var sum = 0;
- 
-  for (i=0; i < rows.length; i++) {
-        sum+= parseInt(rows[i].paymentusdamount);
-  }
-	 
-  // just to show if the sum is OK
- alert('sum=' + sum);
- $('#sumtext').textbox('setText', sum);
-}
-
-
+        
 </script>
 	<style type="text/css">
 		#fm{

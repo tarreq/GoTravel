@@ -27,14 +27,14 @@
 
 <table>
     <tr>
-        <td>
-          Adults:   <?php echo getPassengerCountByAge(getCurrentFlightId(),12.1,100); ?>
+        <td width="100px">
+            Adults: <h3>  <?php echo getPassengerCountByAge(getCurrentFlightId(),12.1,100); ?></h3>
         </td>
-        <td>
-          Children:   <?php echo getPassengerCountByAge(getCurrentFlightId(),2.1,12); ?>  
+        <td width="100px">
+            Children: <h3>  <?php echo getPassengerCountByAge(getCurrentFlightId(),2.1,12); ?>  </h3>
         </td>
-        <td>
-         Infants:   <?php echo getPassengerCountByAge(getCurrentFlightId(),0,2); ?>
+        <td width="100px">
+            Infants: <h3>   <?php echo getPassengerCountByAge(getCurrentFlightId(),0,2); ?> </h3>
         </td>
         <td>
           <a href="javascript:void(0)" class="easyui-linkbutton c1" data-options="iconCls:'fa fa-money'" onclick='downloadCSV({ filename: <?php echo "\"". getCurrentFlightCode(). "_Flight_Passengers.xls\"" ?> });'>Export to Excel</a>  

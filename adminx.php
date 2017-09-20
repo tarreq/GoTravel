@@ -130,11 +130,11 @@ $(function () {
                                 <div title="<?php echo $lang['current_flight_menu_title']; ?>" style="padding:10px;">
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Passengers','currentflight/flightpassengers.php')"><?php echo $lang['current_flight_menu_passengers_data']; ?></a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Payments','currentflight/flightpayment.php')"><?php echo $lang['current_flight_menu_payments']; ?></a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Payments','currentflight/flightpayment.php')"><?php echo $lang['current_flight_menu_payments']; ?></a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Bookings','currentflight/flightbookings.php')"><?php echo $lang['current_flight_menu_bookings']; ?></a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Bookings','currentflight/flightbookings.php')"><?php echo $lang['current_flight_menu_bookings']; ?></a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Payments','payment/payment.php')"><?php echo $lang['current_flight_menu_Reports']; ?></a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Reports','currentflight/flightreports.php')"><?php echo $lang['current_flight_menu_Reports']; ?></a>
 				</div>
                                 <div title="<?php echo $lang['payments_menu_title']; ?>" style="padding:10px;">
                                         
@@ -162,8 +162,6 @@ $(function () {
                                 <div title="Passengers" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">All Passengers</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">Current Passengers</a>
-                                        <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">Passengers Reports</a>
 				</div>
 
@@ -180,11 +178,8 @@ $(function () {
                       
                             
                                 <div title="Settings" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Settings</a>
-                                        <br>
+					
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Profile Settings</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Widget Settings</a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Application Settings</a>
                                         <br>
@@ -491,7 +486,7 @@ $(function () {
                             </ul>
                         </div>
                         <div class="body">
-                            Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
+                            this
                         </div>
                     </div>
                                             </td>

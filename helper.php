@@ -44,7 +44,7 @@ function convertCurrency($amount, $from, $to){
     $url  = "https://www.google.com/finance/converter?a=$amount&from=$from&to=$to";
     $data = file_get_contents($url);
     preg_match("/<span class=bld>(.*)<\/span>/",$data, $converted);
-    $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+    //$converted = preg_replace("/[^0-9.]/", "", $converted[1]);
     return round($converted, 3);
 }
 
@@ -61,6 +61,14 @@ function getLastPayment(){
 inner join members b on a.agentid = b.id
 order by paymentid desc limit 1");
     return $lastPayment;
+    
+}
+
+//get last flight total payment
+function getCurrentFlightTotalPayment(){
+    
+    $currentFlightTotalPayment = DB::queryOneField('totalpayment',"SELECT SUM(totalfare) as totalpayment FROM godb4.booking where flightid=". getCurrentFlightId());
+    return $currentFlightTotalPayment;
     
 }
 
