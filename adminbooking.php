@@ -87,6 +87,7 @@ $(function () {
         
 </head>
 <body>
+    <div id="tt" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
    <div title="Flights" style="padding:5px">
 				
 				<!-- selectable start -->
@@ -244,6 +245,7 @@ $(function () {
 
 					<!-- Datagrid end -->
 				</div> 
+        </div>
       <script>
         
    

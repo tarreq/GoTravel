@@ -145,7 +145,7 @@ $(function () {
                                 <div title="Bookings" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('All Bookings','mybookings.php')">All Bookings</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Book','adminbooking.php')">Book a ticket</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Book a ticket','adminbooking.php')">Book a ticket</a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Cancel Booking','mybookingscancel.php')">Cancel a booking</a>
                                         
@@ -155,9 +155,8 @@ $(function () {
                                     <div title="Flights" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('All Flights','flights.php')">All Flights</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flight X','flights.php')">Flight X</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Reports','flights.php')">Flights Reports</a>
+                                        
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Reports','flightsreports.php')">Flights Reports</a>
 				</div>
                                 <div title="Passengers" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">All Passengers</a>

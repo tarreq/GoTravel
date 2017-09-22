@@ -14,7 +14,7 @@
 	
         
 <!--        Paste rendered grid code here-->
-<table id="dg" class="easyui-datagrid" title="Flights" fit="true"
+<table id="dg" class="easyui-datagrid" title="Flights" fit="true" toolbar="#toolbar" idField="flightid"
 			data-options="
 				iconCls: 'icon-edit',
 				singleSelect: true,
@@ -52,12 +52,22 @@
 			</tr>
 		</thead>
 	</table>
-<br>
+
 <div id="toolbar">
+
+            <span>Flight ID:</span>
+            <input id="flightcode" style="line-height:26px;border:1px solid #ccc">
+<!--            <span>Flight Code:</span>
+            <input id="flightcode" style="line-height:26px;border:1px solid #ccc">-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search</a>	
+
+	</div>
+<br>
+<!--<div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newEntry()">New </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editEntry()">Edit </a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyEntry()">Delete </a>
-</div>
+</div>-->
 	
 	
 	<script type="text/javascript">
@@ -114,6 +124,16 @@
 				});
 			}
 		}
+                
+                //filter 
+function doSearch(){
+//    $('#dg').datagrid('load',{
+//        flightcode: $('#flightcode').val()
+
+//var flightcode = $('#flightcode').combobox('getValue');
+$('#dg').datagrid('load', 'get_flights_q.php?flightcode='+$('#flightcode').val());
+    //});
+}
 	</script>
 	<style type="text/css">
 		#fm{
