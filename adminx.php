@@ -161,18 +161,18 @@ $(function () {
                                 <div title="Passengers" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">All Passengers</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">Passengers Reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengersreports.php')">Passengers Reports</a>
 				</div>
 
 				
                                 <div title="Flights Setup" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Management','flights.php')">Flights</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-flag',plain:true" onclick="addStaticTab('Airports Management','airport/airports.php')">Airports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-flag',plain:true" onclick="addStaticTab('Airports Management','airport/airportmanagement.php')">Airports</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-road',plain:true" onclick="addStaticTab('Routes Management','route/routes.php')">Routes</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-road',plain:true" onclick="addStaticTab('Routes Management','route/routemanagement.php')">Routes</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-home',plain:true" onclick="addStaticTab('Cities Management','cities/cities.php')">Cities</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-home',plain:true" onclick="addStaticTab('Cities Management','cities/citymanagement.php')">Cities</a>
 				</div>
                       
                             

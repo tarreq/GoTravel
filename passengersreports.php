@@ -60,11 +60,11 @@
 	<script type="text/javascript">
                  
                  
-//            $(function(){
-//            var dg = $('#dg').datagrid();
-//            dg.datagrid('enableFilter');
-//            dg.datagrid('doFilter');
-//        });
+                 $(function(){
+            var dg = $('#dg').datagrid();
+            dg.datagrid('enableFilter');
+            dg.datagrid('doFilter');
+        });
             
             
 		var url;
