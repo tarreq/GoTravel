@@ -55,6 +55,11 @@ function lookUpTable($tablename){
     return $result;
 }
 
+function lookUpTableWhere($tablename, $wh,$op, $vl,$limit){
+     $result = DB::query("SELECT * FROM ". $tablename." where ".$wh.$op. "'".$vl."' limit ".$limit);
+    return $result;
+}
+
 //get last flight available seats count
 function getLastPayment(){
     $lastPayment = DB::queryFirstRow("select a.paymentusdamount,b.username from payment a
@@ -98,10 +103,10 @@ order by flightdate limit 1");
 }
 
 function getCurrentFlightCode(){
-    $flightId = DB::queryOneField('flightcode',"SELECT * FROM flight
+    $flightCode = DB::queryOneField('flightcode',"SELECT * FROM flight
 where flightdate >= CURDATE() 
 order by flightdate limit 1");
-    return $flightId;
+    return $flightCode;
     
 }
 

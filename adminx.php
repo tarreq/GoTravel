@@ -178,13 +178,11 @@ $(function () {
                             
                                 <div title="Settings" style="padding:10px;">
 					
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Profile Settings</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Profile Settings','settings/profilesettings.php')">Profile Settings</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Application Settings</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Application Settings','settings/usersettings.php')">Application Settings</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Language Settings</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Settings','settings.php')">Date Format Settings</a>
+                                        
 				</div>
                                 
 
@@ -444,7 +442,7 @@ $(function () {
                                                 <div class="card">
                         <div class="header bg-red">
                             <h2>
-                                Active Flight - F2017008
+                                Upcoming Flights
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -460,8 +458,31 @@ $(function () {
                             </ul>
                         </div>
                         <div class="body">
-                            Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis 
-                            <button type="button" class="btn btn-danger waves-effect">Export Flight</button>
+                            
+                <div class="box-body no-padding">
+                                                        <table class="table table-striped">
+                                                            <tbody><tr>
+                                                                    <th style="width: 10px">#</th>
+                                                                    <th>Code</th>
+                                                                    <th>Date</th>
+                                                                    <th style="width: 40px">Fare</th>
+                                                                </tr>
+                                                                <?php
+                                                                $result = lookUpTableWhere("flight","flightdate",">=", "2017-09-29",5);
+
+                                                                //loop through column array
+                                                                for ($x = 0; $x < count($result); $x++) {
+                                                                    echo "<tr>
+                  <td>" . ($x + 1) . "</td><td>" .$result[$x]['flightcode'] . "</td>
+                  <td>"
+                    .$result[$x]['flightdate'].
+                  "</td>
+                  <td><span class=\"badge bg-red\">" . $result[$x]['firstclassprice'] . " $</span></td>
+                </tr>";
+                                                                }
+                                                                ?>
+                                                            </tbody></table>
+                                                    </div>
                         </div>
                     </div>
                                             </td>
@@ -469,7 +490,7 @@ $(function () {
                                                 <div class="card">
                         <div class="header bg-green">
                             <h2>
-                                Flight F2017008 Last Bookings <small>Description text here...</small>
+                                <?php echo "Flight ". getCurrentFlightCode(). " last bookings"; ?>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -485,7 +506,30 @@ $(function () {
                             </ul>
                         </div>
                         <div class="body">
-                            this
+                             <div class="box-body no-padding">
+                                                        <table class="table table-striped">
+                                                            <tbody><tr>
+                                                                    <th style="width: 10px">#</th>
+                                                                    <th>Agent</th>
+                                                                    <th>Booking No.</th>
+                                                                    <th style="width: 40px">Fare</th>
+                                                                </tr>
+                                                                <?php
+                                                                $result = lookUpTableWhere("booking","flightid","=", getCurrentFlightId(),5);
+
+                                                                //loop through column array
+                                                                for ($x = 0; $x < count($result); $x++) {
+                                                                    echo "<tr>
+                  <td>" . ($x + 1) . "</td><td>" .getUserName($result[$x]['memberid']) . "</td>
+                  <td>"
+                    .$result[$x]['bookingid'].
+                  "</td>
+                  <td><span class=\"badge bg-green\">" . $result[$x]['totalfare'] . " $</span></td>
+                </tr>";
+                                                                }
+                                                                ?>
+                                                            </tbody></table>
+                                                    </div>
                         </div>
                     </div>
                                             </td>
