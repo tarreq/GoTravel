@@ -166,7 +166,7 @@ $(function () {
 
 				
                                 <div title="Flights Setup" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Management','flights.php')">Flights</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Management','flight/flightmanagement.php')">Flights</a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-flag',plain:true" onclick="addStaticTab('Airports Management','airport/airportmanagement.php')">Airports</a>
                                         <br>
@@ -444,7 +444,7 @@ $(function () {
                                                 <div class="card">
                         <div class="header bg-red">
                             <h2>
-                                Active Flight - F2017008 <small>Description</small>
+                                Active Flight - F2017008
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
