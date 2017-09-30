@@ -16,7 +16,7 @@
 	<p>Select a Bookin to see Passengers and details.</p>
 	
 	<table id="dg" title="My bookings" class="easyui-datagrid" style="width:1050px;height:500px"
-			url="mybookings/get_bookings.php" 
+			url="get_bookings.php" 
 			toolbar="#toolbar" pagination="true"
 			fitColumns="true" singleSelect="true" idField="bookingid">
 <!--		<thead>
@@ -99,7 +99,7 @@
                         if (row){
 				$('#dlg').dialog('open').dialog('setTitle','Edit User');
 				$('#fm').form('load',row);
-				url = 'mybookings/update_user.php?id='+row.bookingpassengerid;
+				url = 'update_user.php?id='+row.bookingpassengerid;
 			}
 		}
 		function saveUser(){
@@ -127,7 +127,7 @@
 			if (row){
 				$.messager.confirm('Confirm','Are you sure you want to cancel this booking?',function(r){
 					if (r){
-						$.post('mybookings/destroy_booking.php',{id:row.bookingid},function(result){
+						$.post('destroy_booking.php',{id:row.bookingid},function(result){
 							if (result.success){
                                                                  $.messager.alert('Confirm','Booking Cancelled Successfully !');
 								$('#dg').datagrid('reload');	// reload the user data
@@ -164,6 +164,11 @@
 //        	}
                 } 
                 ]],
+            rowStyler: function(index,row){
+                    if (row.bookingstateid == 1){
+                        return 'background-color:#ff3333;color:#fff;font-weight:bold;';
+                    }
+                },
     view: detailview,
     detailFormatter:function(index,row){
         return '<div style="padding:2px"><table class="ddv"></table></div>';
@@ -171,7 +176,7 @@
     onExpandRow: function(index,row){
         var ddv = $(this).datagrid('getRowDetail',index).find('table.ddv');
         ddv.datagrid({
-            url:'mybookings/get_booking_passengers.php?bookingid='+row.bookingid,
+            url:'get_booking_passengers.php?bookingid='+row.bookingid,
             edatagrid:true,
             autoSave:true,
             fitColumns:true,
@@ -191,7 +196,7 @@
                 {field: 'action', title: 'Edit',
                 formatter:function(value,row,index)
                 {
-		var s = '<button onclick="editRecord(this)">Edit</button><a href="bookprintx.php?bid='+row.bookingid+'">Print</a>';
+		var s = '<button onclick="editRecord(this)">Edit</button><a href="../bookprintx.php?bid='+row.bookingid+'">Print</a>';
 		return s;
         	}
                 }                  
@@ -220,7 +225,7 @@ function editRecord(btn){
         if (row){
 				$('#dlg').dialog('open').dialog('setTitle','Edit User');
 				$('#fm').form('load',row);
-				url = 'mybookings/update_user.php?id='+row.bookingpassengerid;
+				url = 'update_user.php?id='+row.bookingpassengerid;
 			}
         
         
@@ -248,7 +253,7 @@ function deleteBooking(btn){
         if (row){
 				$('#dlg').dialog('open').dialog('setTitle','Edit User');
 				$('#fm').form('load',row);
-				url = 'mybookings/update_user.php?id='+row.bookingpassengerid;
+				url = 'update_user.php?id='+row.bookingpassengerid;
 			}
         
         

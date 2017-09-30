@@ -16,7 +16,7 @@
 	<p>Creadit Transactions Details.</p>
 	
 	<table id="dg" title="Transactions" class="easyui-datagrid" style="width:950px;height:500px"
-			url="credit/get_agent_credit.php" 
+			url="get_agent_credit.php" 
 			pagination="true" fitColumns="true" singleSelect="true" idField="paymentid">
 		<thead>
 			<tr>

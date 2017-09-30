@@ -12,62 +12,52 @@
         <script type="text/javascript" src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 </head>
 <body>
-	<h2>Current Flight Bookings</h2>
-        <?php 
-        require_once('../helper.php');
-        ?>
-        <h3>Flight: <?php echo getCurrentFlightCode(); ?> </h3>
+	<h2>My Bookings</h2>
 	<p>Select a Bookin to see Passengers and details.</p>
 	
 	<table id="dg" title="My bookings" class="easyui-datagrid" style="width:1050px;height:500px"
-			url="get_current_flight_bookings.php" 
+			url="get_bookings.php" 
 			toolbar="#toolbar" pagination="true"
 			fitColumns="true" singleSelect="true" idField="bookingid">
-
+<!--		<thead>
+			<tr>
+				<th field="bookingid" width="35">Booking ID</th>
+                                <th field="bookingtime" width="90">Booking Time</th>
+				<th field="outflight" width="50">Outbound</th>
+                                <th field="inflight" width="40">Inbound</th>
+				<th field="tickettypename" width="35">Class</th>
+				<th field="totalfare" width="30">Fare</th>
+                                <th field="firstclassseats" width="55">First class Seats</th>
+                                <th field="secondclassseats" width="55">Second class Seats</th>
+			</tr>
+		</thead>-->
 	</table>
 
 	<div id="toolbar">
 
+            
+            
             <span>Booknig ID:</span>
+            
             <input id="bookingid" style="line-height:26px;border:1px solid #ccc">
 <!--            <span>Flight Code:</span>
             <input id="flightcode" style="line-height:26px;border:1px solid #ccc">-->
             <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search</a>	
+            <br>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="requestCancel()">Request Cancel</a>
 
 	</div>
 	
 	<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px"
 			closed="true" buttons="#dlg-buttons">
-		<div class="ftitle">Passenger Information</div>
+		<div class="ftitle">Request Cancellation</div>
 		<form id="fm" method="post" novalidate>
 			<div class="fitem">
-				<label>First Name:</label>
-				<input name="fname" class="easyui-textbox" required="true">
-			</div>
-			<div class="fitem">
-				<label>Last Name:</label>
-				<input name="lname" class="easyui-textbox" required="true">
-			</div>
-			<div class="fitem">
-				<label>Phone:</label>
-				<input name="phone" class="easyui-textbox">
-			</div>
-			<div class="fitem">
-				<label>Email:</label>
-				<input name="email" class="easyui-textbox" validType="email">
-			</div>
-                        <div class="fitem">
-				<label>Birthday:</label>
-				<input name="birthday" class="easyui-textbox">
-			</div>
-                        <div class="fitem">
-				<label>Birthmonth:</label>
-				<input name="birthmonth" class="easyui-textbox">
-			</div>
-                        <div class="fitem">
-				<label>Birthyear:</label>
-				<input name="birthyear" class="easyui-textbox">
-			</div>
+                <label>State:</label>
+                <input id="bookingstateid" class="easyui-combobox" name="bookingstateid"
+                       data-options="valueField:'bookingstateid',textField:'statename',url:'../lookuptable.php?table=bookingstate'">
+            </div>
+			
 		</form>
 	</div>
 	<div id="dlg-buttons">
@@ -81,18 +71,13 @@
 			$('#fm').form('clear');
 			url = 'save_user.php';
 		}
-		function editUser(){
-                    
-                        //tq get selected
-                        var tr = $(btn).closest('tr.datagrid-row');
-                        var index = parseInt(tr.attr('datagrid-row-index'));
-                        var dg = tr.closest('div.datagrid-view').children('table');
-                        var row = dg.datagrid('getRows')[index];
-                        
-                        if (row){
-				$('#dlg').dialog('open').dialog('setTitle','Edit User');
+		
+                 function requestCancel(){
+			var row = $('#dg').datagrid('getSelected');
+			if (row){
+				$('#dlg').dialog('open').dialog('setTitle','Request Cancel');
 				$('#fm').form('load',row);
-				url = '../mybookings/update_user.php?id='+row.bookingpassengerid;
+				url = 'booking_request_cancel.php?bookingid='+row.bookingid;
 			}
 		}
 		function saveUser(){
@@ -120,7 +105,7 @@
 			if (row){
 				$.messager.confirm('Confirm','Are you sure you want to cancel this booking?',function(r){
 					if (r){
-						$.post('mybookings/destroy_booking.php',{id:row.bookingid},function(result){
+						$.post('destroy_booking.php',{id:row.bookingid},function(result){
 							if (result.success){
                                                                  $.messager.alert('Confirm','Booking Cancelled Successfully !');
 								$('#dg').datagrid('reload');	// reload the user data
@@ -148,12 +133,13 @@
                 {field:'totalfare',title:'Fare',width:100},
                 {field:'firstclassseats',title:'Business',width:100},
                 {field:'secondclassseats',title:'Economy',width:100},
-                {field: 'action', title: 'Cancel',
-                formatter:function(value,row,index)
-                {
-		var s = '<button onclick="destroyBooking()">Cancel Booking</button>';
-		return s;
-        	}
+                {field: 'action', title: 'Cancel'
+//                    ,
+//                formatter:function(value,row,index)
+//                {
+//		var s = '<button onclick="destroyBooking()">Cancel Booking</button>';
+//		return s;
+//        	}
                 } 
                 ]],
     view: detailview,
@@ -163,7 +149,7 @@
     onExpandRow: function(index,row){
         var ddv = $(this).datagrid('getRowDetail',index).find('table.ddv');
         ddv.datagrid({
-            url:'get_current_flight_booking_passengers.php?bookingid='+row.bookingid,
+            url:'get_booking_passengers.php?bookingid='+row.bookingid,
             edatagrid:true,
             autoSave:true,
             fitColumns:true,
@@ -212,7 +198,7 @@ function editRecord(btn){
         if (row){
 				$('#dlg').dialog('open').dialog('setTitle','Edit User');
 				$('#fm').form('load',row);
-				url = '../mybookings/update_user.php?id='+row.bookingpassengerid;
+				url = 'update_user.php?id='+row.bookingpassengerid;
 			}
         
         
@@ -240,7 +226,7 @@ function deleteBooking(btn){
         if (row){
 				$('#dlg').dialog('open').dialog('setTitle','Edit User');
 				$('#fm').form('load',row);
-				url = '../mybookings/update_user.php?id='+row.bookingpassengerid;
+				url = 'update_user.php?id='+row.bookingpassengerid;
 			}
         
         

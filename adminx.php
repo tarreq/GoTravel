@@ -133,8 +133,8 @@ $(function () {
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Payments','currentflight/flightpayment.php')"><?php echo $lang['current_flight_menu_payments']; ?></a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Bookings','currentflight/flightbookings.php')"><?php echo $lang['current_flight_menu_bookings']; ?></a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Reports','currentflight/flightreports.php')"><?php echo $lang['current_flight_menu_Reports']; ?></a>
+<!--                                        <br>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Current Flight Reports','currentflight/flightreports.php')"><?php echo $lang['current_flight_menu_Reports']; ?></a>-->
 				</div>
                                 <div title="<?php echo $lang['payments_menu_title']; ?>" style="padding:10px;">
                                         
@@ -143,14 +143,14 @@ $(function () {
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick="addStaticTab('Payments','payment/paymentreports.php')"><?php echo $lang['payments_menu_item_payment_reports']; ?></a>
 				</div>
                                 <div title="Bookings" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('All Bookings','mybookings.php')">All Bookings</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('All Bookings','mybookings/mybookingsall.php')">All Bookings</a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Book a ticket','adminbooking.php')">Book a ticket</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Cancel Booking','mybookingscancel.php')">Cancel a booking</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Cancel Booking','mybookings/mybookingscancel.php')">Cancel a booking</a>
                                         
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Booking reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Booking Query','mybookings/mybookings.php')">Booking Query</a>
 				</div>
                                     <div title="Flights" style="padding:10px;">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('All Flights','flights.php')">All Flights</a>
@@ -159,9 +159,9 @@ $(function () {
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Reports','flightsreports.php')">Flights Reports</a>
 				</div>
                                 <div title="Passengers" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">All Passengers</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passenger/passengermanagement.php')">All Passengers</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengersreports.php')">Passengers Reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passenger/passengersreports.php')">Passengers Reports</a>
 				</div>
 
 				
@@ -277,7 +277,7 @@ $(function () {
                                                     <span class="info-box-icon"><i class="fa fa-dollar"></i></span>
                                                     <div class="info-box-content">
                                                         <span class="info-box-text">Currency Rate</span>
-                                                        <span class="info-box-number"><?php echo "1 USD= ". convertCurrency(1, "USD", "SAR")." SAR"; ?></span>
+                                                        <span class="info-box-number"><?php echo "1 USD= ".  /*convertCurrency(1, "USD", "SAR").*/ " SAR"; ?></span>
                                                         <!-- The progress section is optional -->
                                                         <div class="progress">
                                                             <div class="progress-bar" style="width: 70%"></div>

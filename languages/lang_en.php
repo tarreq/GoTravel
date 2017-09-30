@@ -31,4 +31,8 @@ $lang['payments_menu_title'] = 'Payments';
     $lang['payments_menu_item_all_payments'] = 'Payments Management';
     $lang['payments_menu_item_current_flight'] = 'Current Flight Payment';
     $lang['payments_menu_item_payment_reports'] = 'Payment Reports';
+	
+//Numbered Values
+$lang['S100'] = 'Success';
+$lang['S101'] = 'Settings Updated, you should Logout and Re-login to take effect.';
 ?>

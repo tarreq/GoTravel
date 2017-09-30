@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,7 @@
 							msg: result.errorMsg
 						});
 					} else {
-						$.messager.alert('Success','Settings Saved');
+						$.messager.alert('Success','Settings Updated');
 					}
 				}
 			});

@@ -16,7 +16,7 @@ $memberType = DB::queryOneField('membertype', "SELECT * FROM members WHERE id=%s
 if (isset($_POST['bookingid']) && $bookingid <>''){
     if ($memberType == 2){
         //user, get only his bookings
-$results = DB::query("SELECT a.bookingid, a.memberid, a.bookingtime
+$results = DB::query("SELECT a.bookingstateid,a.bookingid, a.memberid, a.bookingtime
 ,b.flightcode as outflight, IFNULL(c.flightcode,0) as inflight
 ,d.tickettypename , a.totalfare 
 , IFNULL(a.firstclassseats,0) as firstclassseats , IFNULL(a.secondclassseats,0) as secondclassseats
@@ -24,7 +24,7 @@ FROM booking a
 inner join flight b on a.flightid = b.flightid 
 left join flight c on a.returnflightid = c.flightid
 inner join tickettype d on a.tickettypeid = d.tickettypeid
-where memberid ='".$userId."' and bookingid=".$bookingid);
+where memberid ='".$userId."' and bookingid=".$bookingid." order by a.bookingtime");
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($results,JSON_UNESCAPED_UNICODE);
@@ -32,7 +32,7 @@ echo json_encode($results,JSON_UNESCAPED_UNICODE);
     else
     {
        //admin , get all booknigs 
-       $results = DB::query("SELECT a.bookingid, a.memberid, a.bookingtime
+       $results = DB::query("SELECT a.bookingstateid,a.bookingid, a.memberid, a.bookingtime
 ,b.flightcode as outflight, IFNULL(c.flightcode,0) as inflight
 ,d.tickettypename , a.totalfare 
 , IFNULL(a.firstclassseats,0) as firstclassseats , IFNULL(a.secondclassseats,0) as secondclassseats
@@ -40,7 +40,7 @@ FROM booking a
 inner join flight b on a.flightid = b.flightid 
 left join flight c on a.returnflightid = c.flightid
 inner join tickettype d on a.tickettypeid = d.tickettypeid
-where bookingid=".$bookingid);
+where bookingid=".$bookingid." order by a.bookingtime");
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($results,JSON_UNESCAPED_UNICODE);
@@ -52,7 +52,7 @@ else
     //user, get only his bookings
     if ($memberType == 2)
     {
-$results = DB::query("SELECT a.bookingid, a.memberid, a.bookingtime
+$results = DB::query("SELECT a.bookingstateid,a.bookingid, a.memberid, a.bookingtime
 ,b.flightcode as outflight, IFNULL(c.flightcode,0) as inflight
 ,d.tickettypename , a.totalfare 
 , IFNULL(a.firstclassseats,0) as firstclassseats , IFNULL(a.secondclassseats,0) as secondclassseats
@@ -60,7 +60,7 @@ FROM booking a
 inner join flight b on a.flightid = b.flightid 
 left join flight c on a.returnflightid = c.flightid
 inner join tickettype d on a.tickettypeid = d.tickettypeid
-where memberid ='".$userId."'");
+where memberid ='".$userId."' order by a.bookingtime");
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($results,JSON_UNESCAPED_UNICODE);
@@ -68,7 +68,7 @@ echo json_encode($results,JSON_UNESCAPED_UNICODE);
     else 
         //admin , get all booknigs 
         {
-        $results = DB::query("SELECT a.bookingid, a.memberid, a.bookingtime
+        $results = DB::query("SELECT a.bookingstateid,a.bookingid, a.memberid, a.bookingtime
 ,b.flightcode as outflight, IFNULL(c.flightcode,0) as inflight
 ,d.tickettypename , a.totalfare 
 , IFNULL(a.firstclassseats,0) as firstclassseats , IFNULL(a.secondclassseats,0) as secondclassseats
@@ -76,7 +76,7 @@ FROM booking a
 inner join flight b on a.flightid = b.flightid 
 left join flight c on a.returnflightid = c.flightid
 inner join tickettype d on a.tickettypeid = d.tickettypeid
-");
+ order by a.bookingtime");
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($results,JSON_UNESCAPED_UNICODE);

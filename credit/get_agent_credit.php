@@ -13,7 +13,8 @@ FROM payment a
 inner join members b on a.adminid = b.id
 inner join members d on a.agentid = d.id
 inner join currency c on a.paymentcurrencyid = c.currencyid
-where a.agentid ='".$userId."'");
+where a.agentid ='".$userId."' "
+        . " order by a.paymenttime");
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($results,JSON_UNESCAPED_UNICODE);

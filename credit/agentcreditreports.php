@@ -18,38 +18,38 @@
     <div id="filterdiv">
         
         <br>
-        <h2>Select filters to apply to flights:</h2>
+        <h2>Select filters to apply to reports:</h2>
         <br>
         <br>
         
-        <form id="paymentreportsform" method="post" action="flightsreports.php.php"> 
+        <form id="paymentreportsform" method="post" action="paymentreports.php"> 
         <table>
-            <tr>
-                <td>From:</td><td><input id="originairportid" class="easyui-combobox" name="originairportid"
-                data-options="valueField:'id',textField:'airportcode',url:'lookuptable.php?table=airport'"></td>
-                <td>To:</td><td><input id="destinationairportid" class="easyui-combobox" name="destinationairportid"
-                data-options="valueField:'id',textField:'airportcode',url:'lookuptable.php?table=airport'"></td>
+<!--            <tr>
+                <td>Added By:</td><td><input id="adminid" class="easyui-combobox" name="adminid"
+                data-options="valueField:'id',textField:'username',url:'../lookuptable_where.php?table=members&wh=membertype&vl=1'"></td>
+                <td>Agent Name:</td><td><input id="agentid" class="easyui-combobox" name="agentid"
+                data-options="valueField:'id',textField:'username',url:'../lookuptable.php?table=members'"></td>
                 
-            </tr>
+            </tr>-->
             <tr>
-                <td width="100px">Departure </td>
+                <td width="100px">Payment From </td>
                 <td width="150px"> 
-                <input id="ddate" name="ddate" class="easyui-datebox" data-options="label:'Select Date:',labelPosition:'top',onSelect:onSelect">
+                <input id="pfrom" name="pfrom" class="easyui-datebox" data-options="label:'Select Date:',labelPosition:'top',onSelect:onSelect">
                 </td>
-                <td width="100px">Return</td>
+                <td width="100px">Payment To </td>
                 <td width="150px"> 
-                <input id="rdate" name="rdate" class="easyui-datebox" data-options="label:'Select Date:',labelPosition:'top',onSelect:onSelect">
+                <input id="pto" name="pto" class="easyui-datebox" data-options="label:'Select Date:',labelPosition:'top',onSelect:onSelect">
                 </td>
             </tr>
             <tr>
                 <td width="60px">
-<!--            <div style="color:#ed0202;">
+            <div style="color:#ed0202;">
                 <h2>Total: <span id="PaymentTotalSpan"></span></h2>
                 
-            </div>-->
+            </div>
             </td>
             <td>
-<!--<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick='downloadCSV({ filename: "stock-data.xls" });'>Export XLS</a>-->
+<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-money',plain:true" onclick='downloadCSV({ filename: "stock-data.xls" });'>Export XLS</a>
             </td>
             </tr>
             
@@ -61,21 +61,23 @@
     	
 	
 	<table id="dg" title="Payments Reports" class="easyui-datagrid" style="width:700px;height:250px"
-			fit="true" url="get_flights_reports.php"
+			fit="true" url="get_agent_credit_reports.php"
 			toolbar="#toolbar" pagination="true" showFooter="true"
-			rownumbers="true" fitColumns="true" singleSelect="true" idField="flightid">
+			rownumbers="true" fitColumns="true" singleSelect="true" idField="paymentid">
 		<thead>
 			<tr>
-				
-                                <th field="flightcode" width="110">fligh code</th>
-				<th field="flightdate" width="50">flight date</th>
-				<th field="origin" width="50">from</th>
-                                <th field="destination" width="50">to</th>
-                                <th field="flighttime" width="110">flight time</th>
-				<th field="firstclassprice" width="50">Business Price</th>
-				<th field="secondclassprice" width="50">Economy price</th>
-                                <th field="remainingfirst" width="50">Available Business</th>
-                                <th field="remainingsecond" width="50">Available Economy</th>
+				<th data-options="field:'adminid',width:60,
+                        formatter:function(value,row){
+                            return row.adminuser;
+                        }">Added By</th>
+				<th data-options="field:'agentid',width:60,
+                        formatter:function(value,row){
+                            return row.agentuser;
+                        }">Agent name</th>
+                                <th field="paymenttime" width="110">Time</th>
+				<th field="paymentamount" width="50">Paid Amount</th>
+				<th field="paymentcurrencyid" width="50">Currency</th>
+                                <th field="paymentusdamount" width="50">USD Amount</th>
 			</tr>
 		</thead>
 	</table>
@@ -202,13 +204,12 @@ function convertArrayOfObjectsToCSV(args) {
    //function on dates select
     function onSelect(){
         
-        var originairportid = $('#originairportid').combobox('getValue');
-        var destinationairportid = $('#destinationairportid').combobox('getValue');
+       
         var newpfrom = '';
         var newpto = '';
         
-        var datevalf = $('#ddate').datebox('getValue');
-        var datevalt = ($('#rdate').datebox('getValue'));
+        var datevalf = $('#pfrom').datebox('getValue');
+        var datevalt = ($('#pto').datebox('getValue'));
         
         
         
@@ -229,24 +230,42 @@ function convertArrayOfObjectsToCSV(args) {
 //        var parts2 = datevalt.split("/");
 //         newpto = parts2[2] + '-' + parts2[0] + '-' + parts2[1];
         
-        $('#dg').datagrid('load', 'get_flights_reports.php?originairportid='+originairportid+'&destinationairportid='+destinationairportid+'&ddate='+newpfrom+'&rdate='+newpto);
+        $('#dg').datagrid('load', 'get_agent_credit_reports.php?pfrom='+newpfrom+'&pto='+newpto);
         }
         
    
-   $('#originairportid').combobox({
-        	
+   $('#adminid').combobox({
+        valueField: 'id',
+	textField: 'username',
+	
 	onChange: function(row){
             onSelect();
-
+//            var adminid = $('#adminid').combobox('getValue');
+//            var agentid = $('#agentid').combobox('getValue');
+//            //$('#aird').combobox('reload', 'data_get/get_destination_airports.php?origin='+origin)
+//
+//        
+//                  $('#dg').datagrid('load', 'get_payments_reports.php?adminid='+adminid+'&agentid='+agentid);
+                  
                }
                
        })
        
        
-       $('#destinationairportid').combobox({
-        onChange: function(row){
+       $('#agentid').combobox({
+        valueField: 'id',
+	textField: 'username',
+	
+	onChange: function(row){
             onSelect();
-
+            
+//            var adminid = $('#adminid').combobox('getValue');
+//            var agentid = $('#agentid').combobox('getValue');
+//            //$('#aird').combobox('reload', 'data_get/get_destination_airports.php?origin='+origin)
+//
+//        
+//                  $('#dg').datagrid('load', 'get_payments_reports.php?adminid='+adminid+'&agentid='+agentid);
+                  
                }
                
        })

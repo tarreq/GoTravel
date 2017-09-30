@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Charter Booking System - V1.0</title>
+	<title>GO Travel</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -101,7 +101,7 @@ $(function () {
                 <img src="travel.png" width="50px" height="50px">
             </td>
         <td style="padding: 5px 10px 0px 5px;">
-	<h2>Charter Booking System v 1.0</h2>
+	<h2>Go Travel</h2>
 	<p><?php require "helper.php";  echo "Logged as: " . $_SESSION['username'] ."<br /><div style=\"color:#ffffff;font-weight: bold;text-align: center;background-color: #737373;width:130px;height:30px;font-size: 16px;\">Credit: ".getCredit(getUserId($_SESSION['username']))."</div>"; ?>
         </br>
         <a href="login/logout.php">Logout</a>
@@ -111,8 +111,8 @@ $(function () {
   <!-- Apply any bg-* class to to the icon to color it -->
   <span class="info-box-icon bg-red"><i class="fa fa-star-o" style=" vertical-align: middle;"></i></span>
   <div class="info-box-content">
-    <span class="info-box-text">Next Flight</span>
-    <span class="info-box-number"><a href="#">F2017004</a></span>
+    <span class="info-box-text">Current Flight</span>
+    <span class="info-box-number"><a href="#"><?php echo getCurrentFlightCode(); ?></a></span>
   </div>
   <!-- /.info-box-content -->
 </div> </td>
@@ -120,8 +120,8 @@ $(function () {
   <!-- Apply any bg-* class to to the icon to color it -->
   <span class="info-box-icon bg-green"><i class="fa fa-envelope-o" style=" vertical-align: middle;"></i></span>
   <div class="info-box-content">
-    <span class="info-box-text">Hot Deals</span>
-    <span class="info-box-number">Flights to Urdo</span>
+    <span class="info-box-text">Seats</span>
+    <span class="info-box-number"><?php echo getLastFlightSeats()['remainingsecond']."/".getLastFlightSeats()['secondclassseats']." - ".getLastFlightSeats()['remainingfirst']."/".getLastFlightSeats()['firstclassseats']; ?></span>
   </div>
   <!-- /.info-box-content -->
 </div> </td>
@@ -129,11 +129,14 @@ $(function () {
   <!-- Apply any bg-* class to to the icon to color it -->
   <span class="info-box-icon bg-aqua"><i class="fa fa-flag-o" style=" vertical-align: middle;"></i></span>
   <div class="info-box-content">
-    <span class="info-box-text">Last Transactions</span>
-    <span class="info-box-number">13,139</span>
+    <span class="info-box-text">Currency Rates</span>
+    <span class="info-box-number"><?php echo "1 USD= ". /*convertCurrency(1, "USD", "SAR").*/ " SAR"; ?></span>
+
   </div>
   <!-- /.info-box-content -->
-</div> </td>
+</div> 
+</td>
+
         </tr>
     </table>
 	 
@@ -150,38 +153,41 @@ $(function () {
 					content1
 				</div>-->
                                 <div title="Bookings" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">All Bookings</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('My Bookings','mybookings/mybookingsall.php')">All Bookings</a>
+<!--                                        <br>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Book a ticket</a>-->
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Book a ticket</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Cancel Booking','mybookings/agentcancelbooking.php')">Cancel a booking</a>
+                                        
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Cancel a booking</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Booking query</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="openMyBookings()">Booking reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-hand-pointer-o',plain:true" onclick="addStaticTab('Booking Query','mybookings/mybookings.php')">Booking Query</a>
 				</div>
                                 <div title="Flights" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Flights Details','flights.php')">All Flights</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('All Flights','flights.php')">All Flights</a>
+                                        
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flight X','flights.php')">Flight X</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Reports','flights.php')">Flights Reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-plane',plain:true" onclick="addStaticTab('Flights Reports','flightsreports.php')">Flights Reports</a>
 				</div>
                                 <div title="Passengers" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">All Passengers</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passenger/passengermanagement.php')">All Passengers</a>
+                                        
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">Current Passengers</a>
-                                        <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passengers.php')">Passengers Reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-users',plain:true" onclick="addStaticTab('Passengers','passenger/passengersreports.php')">Passengers Reports</a>
 				</div>
                                 <div title="Credit" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit','credit.php')">All Transactions</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit','credit/agentcredit.php')">All Transactions</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit','credit.php')">Go Travel Credit</a>
+<!--                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit','credit.php')">Go Travel Credit</a>
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit','credit.php')">Ticket Transactions</a>
+                                        <br>-->
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit reports','credit/agentcreditreports.php')">Credit Reports</a>
+				</div>
+                                <div title="Settings" style="padding:10px;">
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Profile Settings','settings/profilesettings.php')">Profile Settings</a>
                                         <br>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Credit','credit.php')">Credit Reports</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-cogs',plain:true" onclick="addStaticTab('Application Settings','settings/usersettings.php')">Application Settings</a>
+                                        <br>
 				</div>
                                 <div title="Contact" style="padding:10px;">
 					
@@ -191,9 +197,7 @@ $(function () {
                                         <br>
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-envelope-o',plain:true" onclick="">Direct Messeges</a>
 				</div>
-                                <div title="Settings" style="padding:10px;">
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="addStaticTab('Settings','settings.php')">Settings</a>
-				</div>
+                               
                                 <div title="Help" style="padding:10px;">
 					
                                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-envelope-o',plain:true" onclick="">Help</a>

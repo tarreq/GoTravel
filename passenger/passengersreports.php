@@ -15,9 +15,9 @@
 	
         
 <!--        Paste rendered grid code here-->
-<table id="dg" class="easyui-datagrid" title="Flights" fit="true"
+<table id="dg" class="easyui-datagrid" title="Passenger Reports" fit="true"
 			data-options="
-				url: 'get_passengers_q.php'">
+				url: 'get_passengers_reports.php'">
 		<thead>
 			<tr>
 				<th data-options="field:'bookingid',width:80">Booking ID</th>
@@ -25,7 +25,7 @@
                                 <th data-options="field:'lname',width:80">Surname</th>
 				<th data-options="field:'phone',width:90">phone</th>
                                 <th data-options="field:'email',width:90">Email</th>
-				<th data-options="field:'countryid',width:120">Country</th>
+				<th data-options="field:'nameenglish',width:120">Country</th>
                                 <th data-options="field:'birthday',width:120">Birthday</th>
 				<th data-options="field:'birthmonth',width:120">Birthmonth</th>
                                 <th data-options="field:'birthyear',width:120">birthyear</th>

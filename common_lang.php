@@ -16,15 +16,15 @@ $lang = $_SESSION['lang'];
 }
 
 switch ($lang) {
-  case 'en':
+  case '1':
   $lang_file = 'languages/lang_en.php';
   break;
 
-  case 'ar':
+  case '2':
   $lang_file = 'languages/lang_ar.php';
   break;
 
-  case 'tr':
+  case '3':
   $lang_file = 'languages/lang_tr.php';
   break;
 

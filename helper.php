@@ -43,9 +43,30 @@ exit(); // all done
 function convertCurrency($amount, $from, $to){
     $url  = "https://www.google.com/finance/converter?a=$amount&from=$from&to=$to";
     $data = file_get_contents($url);
+    //$txt = getTextBetweenTags($data, "span");
+    
+    
     preg_match("/<span class=bld>(.*)<\/span>/",$data, $converted);
-    //$converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+    $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
     return round($converted, 3);
+    
+}
+
+
+function getTextBetweenTags($string, $tagname) {
+    $pattern = "/<$tagname ?.*>(.*)<\/$tagname>/";
+    preg_match($pattern, $string, $matches);
+    return $matches[1];
+}
+
+function getRate2()
+{
+    $url  = "https://www.google.com/finance/converter?a=1&from=USD&to=TRY";
+    $data = file_get_contents($url);
+    
+    
+    return getTextBetweenTags($data, "span");
+    
 }
 
 
@@ -139,7 +160,7 @@ function getTotalCredit(){
 
 //get user language
 function getUserLanguage(){
-    $lang = DB::queryOneField('langid', "select * from user_setting where userid=%s", getUserId($_SESSION['username']));
+    $lang = DB::queryOneField('languageid', "select * from members where id=%s", getUserId($_SESSION['username']));
     return $lang;
     
 }
